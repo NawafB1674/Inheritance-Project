@@ -10,10 +10,15 @@ public class Facilities {
     }
 
     public String getTeamName(){
-        return "";
+        return teamName;
     }
     
     public String getFacilityName(){
         return facilityName;
+    }
+
+
+    public String toString(){
+        return "Welcome to the home of the " + getTeamName() + ". We hope you enjoy your tour.";
     }
 }
