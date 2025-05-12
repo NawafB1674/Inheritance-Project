@@ -2,6 +2,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+
+    // Pause method to keep user interaction smooth
+    private static void pause(Scanner scanner) {
+        System.out.println("\nPress Enter to return to the main menu...");
+        scanner.nextLine(); // consume leftover newline
+        scanner.nextLine(); // wait for user to press Enter
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean touring = true;
@@ -45,12 +53,14 @@ public class Main {
                     } else {
                         System.out.println("Returning to main menu...");
                     }
+                    pause(scanner);
                     break;
 
                 case 2:
                     System.out.println("\nWelcome to the Weightroom!");
                     System.out.println("Exercise: " + weightroom.getExcercise());
                     System.out.println("Equipment: " + weightroom.getEquipment());
+                    pause(scanner);
                     break;
 
                 case 3:
@@ -62,38 +72,65 @@ public class Main {
                     } else {
                         System.out.println("Locker not found.");
                     }
+                    pause(scanner);
                     break;
 
                 case 4:
-                    System.out.println("\nWelcome to the Café! Here's our menu:");
-                    System.out.println("1. Veggie Burger");
-                    System.out.println("7. Curly Fries");
-                    System.out.println("29. Half-Pounder Meat Burger");
-                    System.out.println("184. Protein Smoothie");
-                    System.out.println("3726. Vegan Wrap");
-                    System.out.print("What would you like to order? ");
+                    ArrayList<String> order = new ArrayList<>();
+                    boolean ordering = true;
 
-                    int foodItem = scanner.nextInt();
-                    switch (foodItem) {
-                        case 1:
-                            System.out.println("You've selected a Veggie Burger.");
-                            break;
-                        case 7:
-                            System.out.println("You've selected Curly Fries.");
-                            break;
-                        case 29:
-                            System.out.println("You've selected a Half-Pounder Meat Burger.");
-                            break;
-                        case 184:
-                            System.out.println("You've selected a Protein Smoothie.");
-                            break;
-                        case 3726:
-                            System.out.println("You've selected a Vegan Wrap.");
-                            break;
-                        default:
-                            System.out.println("Invalid choice. Please try again.");
+                    while (ordering) {
+                        System.out.println("\nWelcome to the Café! Here's our menu:");
+                        System.out.println("1. Veggie Burger");
+                        System.out.println("7. Curly Fries");
+                        System.out.println("29. Half-Pounder Meat Burger");
+                        System.out.println("184. Protein Smoothie");
+                        System.out.println("3726. Vegan Wrap");
+                        System.out.println("0. Finalize order");
+
+                        System.out.print("Enter the number of the item you'd like to order (or 0 to finish): ");
+                        int foodItem = scanner.nextInt();
+
+                        switch (foodItem) {
+                            case 1:
+                                order.add("Veggie Burger");
+                                System.out.println("Veggie Burger added to your order.");
+                                break;
+                            case 7:
+                                order.add("Curly Fries");
+                                System.out.println("Curly Fries added to your order.");
+                                break;
+                            case 29:
+                                order.add("Half-Pounder Meat Burger");
+                                System.out.println("Half-Pounder Meat Burger added to your order.");
+                                break;
+                            case 184:
+                                order.add("Protein Smoothie");
+                                System.out.println("Protein Smoothie added to your order.");
+                                break;
+                            case 3726:
+                                order.add("Vegan Wrap");
+                                System.out.println("Vegan Wrap added to your order.");
+                                break;
+                            case 0:
+                                ordering = false;
+                                break;
+                            default:
+                                System.out.println("Invalid choice. Please try again.");
+                        }
                     }
-                    break;
+
+                    if (order.size() > 0) {
+                        System.out.println("\nYou have ordered:");
+                        for (String item : order) {
+                            System.out.println("- " + item);
+                        }
+                    } else {
+                        System.out.println("You didn't order anything.");
+                    }
+
+    pause(scanner);
+    break;
 
                 case 5:
                     touring = false;
@@ -102,6 +139,7 @@ public class Main {
 
                 default:
                     System.out.println("Invalid input. Please try again.");
+                    pause(scanner);
             }
         }
 
